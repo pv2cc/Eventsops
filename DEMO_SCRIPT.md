@@ -44,7 +44,7 @@
 
 **Say:**
 
-> "We don't just react faster — we prevent breakdown collapse. This corridor-time risk surface aggregates 4,896 historical breakdowns by corridor, hour, and day."
+> "We don't just react faster — we prevent breakdown collapse. BMTC buses alone are **30% of breakdowns**; buses plus heavy vehicles are **81%** — that's our heavy-vehicle story on 100%-filled `veh_type`, not the dead truck-age columns. This corridor×hour×day risk surface captures twin peaks at **8–10pm and 4–6am** — over half of breakdowns."
 
 **Point to map:**
 - Large red/orange corridor circles = high risk
@@ -71,8 +71,13 @@
 ## Honest Framing (if asked)
 
 - We forecast **incident impact and resource need**, not km/h traffic speed — the dataset has no flow data.
-- Truck age/cargo columns were only 3.4% filled, so breakdown risk uses **corridor × time × vehicle type** instead of truck-profile ML.
+- **Planned congestion too:** 467 planned events (processions, VIP moves, public events, construction) use the same dispatch engine — not breakdown-only.
+- Truck age/cargo columns were only 3.4% filled → heavy-vehicle insight comes from **`veh_type`** (BMTC buses ~30%, buses+heavy ~81%).
+- **6,699 clearance labels:** 2,723 from close timestamps, remainder imputed from `modified_datetime` — disclosed in `spine.py`; UI shows confidence band.
 - `assigned_to_police_id` is sparse (1.6%), so dispatch uses **station centroids + live load**, not assignment timestamps.
+- **~34% Non-corridor breakdowns** → station dispatch; pre-staging targets named corridor hotspots.
+
+Full Q&A: **`JUDGE_QA.md`**
 
 ---
 

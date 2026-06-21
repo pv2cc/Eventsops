@@ -49,9 +49,28 @@ ASTraM CSV → Shared spine (parquet) → Models → Streamlit + Mappls dashboar
 - **Station recommender:** Weighted score (speed 40%, load 35%, distance 25%) + overload reroute
 - **Closure predictor:** High/medium/low badge at event creation
 
-### Module B — Breakdown risk
-- Corridor × hour × day risk surface (honest substitute — truck-age fields 96.6% empty)
+### Module B — Breakdown risk & vehicle-type insight
+- Corridor × hour × day risk surface — truck-age/cargo fields 96.6% empty, so we use **100%-filled `veh_type`** instead
+- **BMTC buses = ~30% of breakdowns**; buses + heavy vehicles + LCVs/trucks = **~81%** — the defensible heavy-vehicle differentiator
 - Greedy pre-staging: **5 units**, **48.5% coverage**, **~1,779 veh-hrs avoided over the 5-month record (~83/wk)**
+
+### Planned events (Theme 2 “both halves”)
+The same forecast → dispatch engine handles **467 planned events**, not just breakdowns:
+- **311** construction · **84** public_event · **38** procession · **20** vip_movement (+ 8 protest)
+- **142 crowd/VIP/procession events** plus construction — planned congestion on one pipeline with unplanned
+
+---
+
+## Clearance label provenance (disclosed upfront)
+
+| Label source | Count | Notes |
+|--------------|------:|-------|
+| `closed_datetime` → `clearance_time_min` | **2,723** (~41% of training labels) | Direct close timestamp |
+| `modified_datetime` imputation for finished events | **~3,976** (~59%) | When `closed_datetime` missing but status is closed/resolved |
+| **Total training labels** | **6,699** | Range-validated 0–720 min; outliers dropped |
+
+- Median clearance: **~50 min** (close-stamp only) vs **~128 min** (with imputed labels) — imputation skews target longer; model reports a **confidence band** to reflect uncertainty
+- This is documented in `src/spine.py` (`add_effective_close`) — not hidden
 
 ---
 
@@ -60,7 +79,7 @@ ASTraM CSV → Shared spine (parquet) → Models → Streamlit + Mappls dashboar
 | Metric | Value |
 |--------|-------|
 | Historical events | 8,173 |
-| Labelled clearance times | 6,699 |
+| Labelled clearance times | 6,699 (2,723 direct close-stamp; remainder imputed — see above) |
 | Clearance model MAE | ~54 min |
 | Pre-staged units | 5 |
 | Breakdown coverage | 48.5% |
@@ -73,7 +92,9 @@ ASTraM CSV → Shared spine (parquet) → Models → Streamlit + Mappls dashboar
 
 - No km/h or live traffic volume — not in ASTraM dataset
 - `assigned_to_police_id` sparse (1.6%) — dispatch uses station centroids + synthetic live load
-- Truck age / cargo / breakdown reason model **not built** — fields 96.6% missing (Phase 0 audit)
+- Truck age / cargo / breakdown reason model **not built** — fields 96.6% missing; **`veh_type` is 100% filled on breakdowns** and carries the heavy-vehicle story instead
+- **~34% of breakdowns tagged “Non-corridor”** — pre-staging targets named corridors; off-corridor events still get Smart Dispatch by station
+- **~59% of clearance labels imputed** from `modified_datetime` — disclosed above; confidence bands shown at prediction time
 
 ---
 
@@ -86,7 +107,21 @@ ASTraM CSV → Shared spine (parquet) → Models → Streamlit + Mappls dashboar
 | **Scalability** | Same pipeline for all corridors and 54 stations |
 | **Sustainability** | Retrain button + pattern tab; each close event is a label |
 | **Completeness** | Full loop on one dashboard; Mappls map + dispatch + prevention |
-| **Innovation** | Transparent ranking + overload reroute + preventive pre-staging |
+| **Innovation** | BMTC-bus/heavy-vehicle breakdown insight + transparent dispatch + preventive pre-staging |
+
+---
+
+## Judge Q&A defense sheet
+
+See **`JUDGE_QA.md`** for full question-by-question answers. Headlines:
+
+| If they ask… | Your answer |
+|--------------|-------------|
+| “Where’s rally/festival forecasting?” | **467 planned events** — processions, VIP movements, public events, construction — same engine as breakdowns |
+| “What about heavy vehicles?” | **`veh_type` 100% filled** — BMTC buses **~30%**, buses+heavy **~81%**; not the dead truck-age columns |
+| “How many labels are real?” | **2,723 close-stamp** + **3,976 imputed** = 6,699; disclosed in `spine.py`; confidence band at inference |
+| “What about Non-corridor events?” | **~34%** off named corridors → station-based dispatch; pre-staging concentrates on named hotspots |
+| “Why pre-stage at 8pm?” | Breakdowns **twin-peak 7–10pm and 4–6am** (~55% in those windows) — corridor×hour surface captures this |
 
 ---
 
@@ -155,6 +190,7 @@ See `DEMO_SCRIPT.md`:
 | `src/models/breakdown_risk.py` | Risk + pre-staging |
 | `data/models/dispatch_summary.json` | Model metrics |
 | `DEMO_SCRIPT.md` | Recorded demo flow |
+| `JUDGE_QA.md` | Question-by-question defense |
 
 ---
 
