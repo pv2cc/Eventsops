@@ -1,0 +1,21 @@
+{
+  "features": [
+    "event_type",
+    "event_cause",
+    "priority",
+    "zone_filled",
+    "junction_filled",
+    "corridor_filled",
+    "veh_type_filled",
+    "hour_of_day",
+    "day_of_week",
+    "is_weekend",
+    "is_breakdown"
+  ],
+  "train_rows": 6538,
+  "test_rows": 1635,
+  "accuracy": 0.9241590214067278,
+  "f1": 0.32608695652173914,
+  "roc_auc": 0.7630888888888889,
+  "baseline_closure_rate": 0.08271136669521595
+}

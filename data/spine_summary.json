@@ -1,0 +1,13 @@
+{
+  "rows": 8173,
+  "columns": 68,
+  "unique_stations": 54,
+  "clearance_time_available": 2723,
+  "effective_clearance_available": 6699,
+  "resolution_time_available": 72,
+  "median_clearance_min": 49.98706856666667,
+  "median_effective_clearance_min": 127.85712643333333,
+  "median_live_load": 8.0,
+  "overloaded_event_pct": 45.026306129940046,
+  "breakdown_events": 4896
+}

@@ -1,0 +1,18 @@
+{
+  "runs": [
+    {
+      "timestamp": "2026-06-21T12:39:52.777401+00:00",
+      "before": {
+        "clearance_mae": 53.96168952107217,
+        "closure_auc": 0.7630888888888889,
+        "breakdown_coverage": 48.5
+      },
+      "after": {
+        "clearance_mae": 53.96168952107217,
+        "closure_auc": 0.7630888888888889,
+        "breakdown_coverage": 48.5
+      },
+      "rows_used": 8173
+    }
+  ]
+}

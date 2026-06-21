@@ -1,0 +1,51 @@
+{
+  "module": "smart_dispatch",
+  "clearance_model": {
+    "target": "effective_clearance_time_min",
+    "features": [
+      "event_type",
+      "event_cause",
+      "priority",
+      "zone_filled",
+      "junction_filled",
+      "corridor_filled",
+      "veh_type_filled",
+      "requires_road_closure",
+      "hour_of_day",
+      "day_of_week",
+      "is_weekend",
+      "is_breakdown"
+    ],
+    "train_rows": 4893,
+    "test_rows": 1224,
+    "mae_minutes": 53.96168952107217,
+    "rmse_minutes": 66.4647398102252,
+    "residual_p10": -62.5532701395899,
+    "residual_p90": 87.16921106780246,
+    "median_predicted_min": 80.36801423900583,
+    "train_cap_minutes": 480,
+    "target_transform": "log1p"
+  },
+  "closure_model": {
+    "features": [
+      "event_type",
+      "event_cause",
+      "priority",
+      "zone_filled",
+      "junction_filled",
+      "corridor_filled",
+      "veh_type_filled",
+      "hour_of_day",
+      "day_of_week",
+      "is_weekend",
+      "is_breakdown"
+    ],
+    "train_rows": 6538,
+    "test_rows": 1635,
+    "accuracy": 0.9241590214067278,
+    "f1": 0.32608695652173914,
+    "roc_auc": 0.7630888888888889,
+    "baseline_closure_rate": 0.08271136669521595
+  },
+  "station_count": 54
+}

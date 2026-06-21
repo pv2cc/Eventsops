@@ -1,0 +1,15 @@
+{
+  "module": "breakdown_risk",
+  "risk_cells": 3132,
+  "corridors": 22,
+  "top_corridor": "Mysore Road",
+  "impact": {
+    "reactive_delay_min": 45.0,
+    "prestage_radius_km": 8.0,
+    "units_deployed": 5,
+    "total_breakdown_events": 4894,
+    "covered_breakdown_events": 2372,
+    "coverage_pct": 48.5,
+    "vehicle_hours_closure_avoided": 1779.0
+  }
+}

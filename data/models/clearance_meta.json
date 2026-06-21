@@ -1,0 +1,26 @@
+{
+  "target": "effective_clearance_time_min",
+  "features": [
+    "event_type",
+    "event_cause",
+    "priority",
+    "zone_filled",
+    "junction_filled",
+    "corridor_filled",
+    "veh_type_filled",
+    "requires_road_closure",
+    "hour_of_day",
+    "day_of_week",
+    "is_weekend",
+    "is_breakdown"
+  ],
+  "train_rows": 4893,
+  "test_rows": 1224,
+  "mae_minutes": 53.96168952107217,
+  "rmse_minutes": 66.4647398102252,
+  "residual_p10": -62.5532701395899,
+  "residual_p90": 87.16921106780246,
+  "median_predicted_min": 80.36801423900583,
+  "train_cap_minutes": 480,
+  "target_transform": "log1p"
+}
