@@ -13,7 +13,8 @@ def main() -> None:
     print(f"  Top corridor:   {summary['top_corridor']}")
     print(f"  Units deployed: {impact['units_deployed']}")
     print(f"  Coverage:       {impact['coverage_pct']}% of breakdown events")
-    print(f"  Vehicle-hours avoided: {impact['vehicle_hours_closure_avoided']}")
+    print(f"  Vehicle-hours avoided (5-mo record): {impact['vehicle_hours_closure_avoided']}")
+    print(f"  Weekly rate (~{impact['dataset_weeks']} wk): {impact['vehicle_hours_avoided_per_week']}/week")
 
 
 if __name__ == "__main__":

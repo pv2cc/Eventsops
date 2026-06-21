@@ -20,7 +20,11 @@ def render() -> None:
     st.caption("Quantified outcomes aligned to Gridlock evaluation criteria")
 
     c1, c2, c3, c4 = st.columns(4)
-    c1.metric("Veh-hrs avoided / week", f"{impact.get('vehicle_hours_closure_avoided', 0):,.0f}")
+    c1.metric(
+        "Veh-hrs avoided (5-mo)",
+        f"{impact.get('vehicle_hours_closure_avoided', 0):,.0f}",
+        help=f"Total across the ~5-month ASTraM record (~{impact.get('vehicle_hours_avoided_per_week', 0):,.0f}/week)",
+    )
     c2.metric("Breakdown coverage", f"{impact.get('coverage_pct', 0)}%")
     c3.metric("Pre-staged units", impact.get("units_deployed", 0))
     c4.metric("Clearance MAE", f"{dispatch_summary.get('clearance_model', {}).get('mae_minutes', 0):.0f} min")
@@ -41,7 +45,7 @@ def render() -> None:
         f"""
 - **Risk surface:** corridor × hour × day-of-week from {int(events['is_breakdown'].sum()):,} breakdown events
 - **Pre-staging:** greedy placement of **{impact.get('units_deployed', 0)} units** covering **{impact.get('coverage_pct', 0)}%** of historical breakdowns
-- **Avoided congestion:** **{impact.get('vehicle_hours_closure_avoided', 0):,.0f} vehicle-hours/week** (closure-duration model)
+- **Avoided congestion:** **{impact.get('vehicle_hours_closure_avoided', 0):,.0f} vehicle-hours** across the ~5-month record (~{impact.get('vehicle_hours_avoided_per_week', 0):,.0f}/week) (closure-duration model)
 - **Truck-age model skipped:** only 3.4% of rows had cargo/age fields — honest scope per ASTraM audit
         """
     )

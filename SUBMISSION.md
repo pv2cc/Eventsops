@@ -2,7 +2,7 @@
 
 **Theme:** 2 — Event-Driven Congestion  
 **Team product:** EventOps — forecast → optimise → prevent  
-**Data:** ASTraM anonymized lifecycle events (8,173 rows, 54 stations, Sep 2023–Apr 2024)  
+**Data:** ASTraM anonymized lifecycle events (8,173 rows, 54 stations, Nov 2023–Apr 2024)  
 **Maps:** Mappls (MapmyIndia) JS SDK  
 
 ---
@@ -51,7 +51,7 @@ ASTraM CSV → Shared spine (parquet) → Models → Streamlit + Mappls dashboar
 
 ### Module B — Breakdown risk
 - Corridor × hour × day risk surface (honest substitute — truck-age fields 96.6% empty)
-- Greedy pre-staging: **5 units**, **48.5% coverage**, **~1,779 veh-hrs/week avoided**
+- Greedy pre-staging: **5 units**, **48.5% coverage**, **~1,779 veh-hrs avoided over the 5-month record (~83/wk)**
 
 ---
 
@@ -64,8 +64,8 @@ ASTraM CSV → Shared spine (parquet) → Models → Streamlit + Mappls dashboar
 | Clearance model MAE | ~54 min |
 | Pre-staged units | 5 |
 | Breakdown coverage | 48.5% |
-| Vehicle-hours avoided / week | ~1,779 |
-| Officer-hours saved / week (est.) | ~623 |
+| Vehicle-hours avoided (5-mo record) | ~1,779 (≈83/wk) |
+| Officer-hours saved (5-mo record, est.) | ~623 (≈29/wk) |
 
 ---
 
@@ -81,7 +81,7 @@ ASTraM CSV → Shared spine (parquet) → Models → Streamlit + Mappls dashboar
 
 | Criterion | How EventOps scores |
 |-----------|---------------------|
-| **Impact** | 1,779 veh-hrs/wk + before/after panel per simulated incident |
+| **Impact** | 1,779 veh-hrs avoided over 5-mo record (~83/wk) + before/after panel per simulated incident |
 | **Feasibility** | 100% on provided CSV; no external traffic APIs required |
 | **Scalability** | Same pipeline for all corridors and 54 stations |
 | **Sustainability** | Retrain button + pattern tab; each close event is a label |
@@ -120,7 +120,7 @@ See `DEMO_SCRIPT.md`:
 ### What separates finalists
 
 1. **Show the loop, not a slide** — live dispatch beats static architecture diagrams
-2. **One killer number** — lead with **1,779 veh-hrs/week avoided**
+2. **One killer number** — lead with **1,779 veh-hrs of closure avoided** across the 5-month record (~83/wk)
 3. **Transparency** — explain dispatch weights; judges distrust black boxes
 4. **Honesty** — call out sparse fields; shows you read the data
 5. **Partner alignment** — Mappls map visible; ASTraM columns named in UI

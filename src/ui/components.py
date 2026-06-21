@@ -33,4 +33,4 @@ def render_before_after(impact: dict) -> None:
         st.caption("Pre-staged corridor" if preventive["pre_staged_corridor"] else "Partial coverage")
     with c3:
         st.metric("Officer-hrs saved / wk", f"{impact['officer_hours_saved_per_week']:.0f}")
-        st.caption(f"{impact['vehicle_hours_avoided_per_week']:,.0f} veh-hrs avoided")
+        st.caption(f"~{impact['vehicle_hours_avoided_per_week']:,.0f} veh-hrs/wk · {impact['vehicle_hours_avoided_total']:,.0f} over 5-mo record")

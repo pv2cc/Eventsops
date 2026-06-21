@@ -10,6 +10,8 @@
     "total_breakdown_events": 4894,
     "covered_breakdown_events": 2372,
     "coverage_pct": 48.5,
-    "vehicle_hours_closure_avoided": 1779.0
+    "vehicle_hours_closure_avoided": 1779.0,
+    "dataset_weeks": 21.4,
+    "vehicle_hours_avoided_per_week": 83.1
   }
 }

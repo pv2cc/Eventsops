@@ -18,6 +18,9 @@ from src.config import (
 from src.spine import haversine_km
 
 REACTIVE_DELAY_MIN = 45.0
+# ASTraM record spans ~150 days (Nov 2023 - Apr 2024); used to convert
+# dataset-total avoided vehicle-hours into an honest weekly rate.
+DATASET_WEEKS = 21.4
 PRESTAGE_RADIUS_KM = 8.0
 DEFAULT_UNITS = 5
 
@@ -149,6 +152,8 @@ def greedy_prestaging(
         "covered_breakdown_events": covered_events,
         "coverage_pct": round(100 * covered_events / max(total_events, 1), 1),
         "vehicle_hours_closure_avoided": round(vehicle_hours_avoided, 1),
+        "dataset_weeks": DATASET_WEEKS,
+        "vehicle_hours_avoided_per_week": round(vehicle_hours_avoided / DATASET_WEEKS, 1),
     }
     return placements, impact
 

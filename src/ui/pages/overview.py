@@ -28,7 +28,11 @@ def render(impact: dict, dispatch_summary: dict, event_count: int, breakdown_cou
     c1.metric("Historical events", f"{event_count:,}")
     c2.metric("Breakdown incidents", f"{breakdown_count:,}")
     c3.metric("Clearance model MAE", f"{dispatch_summary.get('clearance_model', {}).get('mae_minutes', 0):.0f} min")
-    c4.metric("Veh-hrs avoided / wk", f"{impact.get('vehicle_hours_closure_avoided', 0):,.0f}")
+    c4.metric(
+        "Veh-hrs avoided (5-mo)",
+        f"{impact.get('vehicle_hours_closure_avoided', 0):,.0f}",
+        help=f"Total across the ~5-month record (~{impact.get('vehicle_hours_avoided_per_week', 0):,.0f}/week)",
+    )
 
     st.subheader("Problem → Solution")
     p1, p2 = st.columns(2)
@@ -69,7 +73,7 @@ flowchart LR
 
     st.subheader("Evaluation alignment")
     rows = [
-        ("Impact", "1,779 veh-hrs/wk avoided · officer-hours saved · preventive breakdown clearance"),
+        ("Impact", "1,779 veh-hrs avoided over 5-mo record (~83/wk) · officer-hours saved · preventive breakdown clearance"),
         ("Feasibility", "100% built on provided ASTraM dataset — 8,173 real lifecycle events"),
         ("Scalability", "Same pipeline for all corridors, zones, and 54 police stations"),
         ("Sustainability", "Retrain on every closed event · recurring pattern surfacing"),

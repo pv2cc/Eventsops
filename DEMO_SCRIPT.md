@@ -53,7 +53,7 @@
 
 **Say:**
 
-> "Greedy pre-staging covers 48.5% of historical breakdown volume. Our headline metric: **1,779 vehicle-hours of closure avoided** per week versus purely reactive dispatch — assuming a 45-minute reactive delay before clearance starts."
+> "Greedy pre-staging covers 48.5% of historical breakdown volume. Our headline metric: **1,779 vehicle-hours of closure avoided across the five-month record — roughly 83 a week** versus purely reactive dispatch, assuming a 45-minute reactive delay before clearance starts."
 
 ---
 

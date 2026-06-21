@@ -45,7 +45,11 @@ def main() -> None:
 
     st.sidebar.divider()
     st.sidebar.metric("Events", f"{len(events):,}")
-    st.sidebar.metric("Veh-hrs / wk saved", f"{impact.get('vehicle_hours_closure_avoided', 0):,.0f}")
+    st.sidebar.metric(
+        "Veh-hrs avoided",
+        f"{impact.get('vehicle_hours_closure_avoided', 0):,.0f}",
+        help=f"Total across the ~5-month record (~{impact.get('vehicle_hours_avoided_per_week', 0):,.0f}/week)",
+    )
 
     page_fn = PAGES[choice]
     if choice == "Overview":
